@@ -3,11 +3,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
 
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined
-} from "@ant-design/icons"
 import type { MenuProps } from "antd"
 import { Menu } from "antd"
 
@@ -54,74 +49,6 @@ const routesColection: RoutesType[] = [
     ]
   }
 ]
-
-const items: MenuProps["items"] = [
-  {
-    label: "Navigation One",
-    key: "mail"
-  },
-  {
-    label: "Navigation Two",
-    key: "app"
-  },
-  {
-    label: "Navigation Three - Submenu",
-    key: "SubMenu",
-
-    children: [
-      {
-        type: "group",
-        label: "Item 1",
-
-        children: [
-          {
-            label: "Option 1",
-            key: "setting:1",
-            style: { padding: 0 }
-          },
-          {
-            label: "Option 2",
-            key: "setting:2",
-            style: { padding: 0 }
-          }
-        ]
-      },
-      {
-        type: "group",
-        label: "Item 2",
-
-        children: [
-          {
-            label: "Option 3",
-
-            key: "setting:3"
-          },
-          {
-            label: "Option 4",
-
-            key: "setting:4"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: (
-      <Link className={`text-nowrap p-0 m-0`} href="/posts/post-2">
-        posts/post-2
-      </Link>
-    ),
-
-    key: "alipay"
-  }
-]
-
-// (
-
-//   {
-//       {createnastedRoutes(route.children, parentPath + route.path)}
-//   }
-// )
 
 const createnastedRoutes = (
   routes: RoutesType[],
