@@ -35,10 +35,6 @@ export default function Navigation() {
             {
               path: "/sub-post-2",
               name: "sub-post-2"
-            },
-            {
-              path: "/sub-post-3",
-              name: "sub-post-3"
             }
           ]
         },
@@ -54,49 +50,28 @@ export default function Navigation() {
     }
   ]
 
-  const createRouterList = (routes: BaseRoute[]) => (
-    <ul>
-      {routes.map(({ path, name }) => (
-        <li key={v4()}>
-          <Link
-            className={`link ${
-              pathname === path ? "bg-blue-500" : "bg-red-500"
-            }`}
-            href={path}
-          >
-            {name}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
+  const handleColor = (value: string) =>
+    pathname.includes(value) ? "bg-blue-500" : "bg-red-500"
 
-  const createnastedRoutes = (routes: RoutesType[], parentPath: string) => {
-    return routes.map((route) => {
+  const createnastedRoutes = (routes: RoutesType[], parentPath: string) =>
+    routes.map((route) => {
       if (route.children !== undefined) {
-        const path = parentPath + route.path
-
-        const uniqKey = v4()
-        const listGroup = route.name.toLowerCase()
         return (
           <li
-            key={uniqKey}
-            className={`relative group cursor-pointer ${
-              pathname.includes(route.path) ? "bg-blue-500" : "bg-red-500"
-            }`}
+            key={v4()}
+            className={`py-4 inline-block relative group cursor-pointer ${handleColor(
+              route.path
+            )}`}
           >
             <Link
-              className={`link ${
-                pathname.includes(route.path) ? "bg-blue-500" : "bg-red-500"
-              }`}
+              className={`text-nowrap ${handleColor(route.path)}`}
               href={parentPath + route.path}
             >
               {route.name}
             </Link>
             {
-              <ul className={`relative left-full hidden group-hover:block`}>
-                {/* <ul className="hidden group-hover:flex"> */}
-                {createnastedRoutes(route.children, path)}
+              <ul className={`absolute left-full hidden group-hover:block`}>
+                {createnastedRoutes(route.children, parentPath + route.path)}
               </ul>
             }
           </li>
@@ -104,11 +79,9 @@ export default function Navigation() {
       }
 
       return (
-        <li key={v4()}>
+        <li key={v4()} className="py-4 inline-block">
           <Link
-            className={`link ${
-              pathname.includes(route.path) ? "bg-blue-500" : "bg-red-500"
-            }`}
+            className={`text-nowrap ${handleColor(route.path)}`}
             href={parentPath + route.path}
           >
             {route.name}
@@ -116,11 +89,12 @@ export default function Navigation() {
         </li>
       )
     })
-  }
 
   return (
-    <nav>
-      <ul className="flex">{createnastedRoutes(routesColection, "")}</ul>
+    <nav className=" pr-40">
+      <ul className=" right-20 flex">
+        {createnastedRoutes(routesColection, "")}
+      </ul>
     </nav>
   )
 }

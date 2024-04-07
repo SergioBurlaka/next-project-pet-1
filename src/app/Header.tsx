@@ -4,9 +4,9 @@ import Navigation from "./Navigation"
 
 export default function Header() {
   return (
-    <div className=" fixed w-full flex between">
-      <span>My Logo</span>
+    <header className="shadow-lg fixed w-full flex justify-between items-center bg-slate-200">
+      <span className=" mx-10 uppercase font-bold">My Logo</span>
       <Navigation />
-    </div>
+    </header>
   )
 }
