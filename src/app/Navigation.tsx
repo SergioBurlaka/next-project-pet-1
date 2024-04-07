@@ -25,30 +25,30 @@ export default function Navigation() {
       name: "Posts",
       children: [
         {
-          path: "/first",
-          name: "First",
+          path: "/post-1",
+          name: "post-1",
           children: [
             {
-              path: "/one",
-              name: "one"
+              path: "/sub-post-1",
+              name: "sub-post-1"
             },
             {
-              path: "/two",
-              name: "two"
+              path: "/sub-post-2",
+              name: "sub-post-2"
             },
             {
-              path: "/three",
-              name: "three"
+              path: "/sub-post-3",
+              name: "sub-post-3"
             }
           ]
         },
         {
-          path: "/second",
-          name: "Second"
+          path: "/post-2",
+          name: "post-2"
         },
         {
-          path: "/third",
-          name: "Third"
+          path: "/post-3",
+          name: "post-3"
         }
       ]
     }
@@ -74,18 +74,28 @@ export default function Navigation() {
   const createnastedRoutes = (routes: RoutesType[], parentPath: string) => {
     return routes.map((route) => {
       if (route.children !== undefined) {
-
         const path = parentPath + route.path
+
+        const uniqKey = v4()
+        const listGroup = route.name.toLowerCase()
         return (
           <li
-            key={v4()}
-            className={`group cursor-pointer ${
+            key={uniqKey}
+            className={`relative group cursor-pointer ${
               pathname.includes(route.path) ? "bg-blue-500" : "bg-red-500"
             }`}
           >
-            <span>{route.name}</span>
+            <Link
+              className={`link ${
+                pathname.includes(route.path) ? "bg-blue-500" : "bg-red-500"
+              }`}
+              href={parentPath + route.path}
+            >
+              {route.name}
+            </Link>
             {
-              <ul className="hidden group-hover:flex">
+              <ul className={`relative left-full hidden group-hover:block`}>
+                {/* <ul className="hidden group-hover:flex"> */}
                 {createnastedRoutes(route.children, path)}
               </ul>
             }
