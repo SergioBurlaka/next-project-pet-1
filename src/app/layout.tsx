@@ -6,6 +6,7 @@ import Header from "./Header"
 import { AntdRegistry } from "@ant-design/nextjs-registry"
 
 import HeaderMenu from "./HeaderMenu"
+import Container from "./Container"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,11 +24,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AntdRegistry>
-          <>
-          <HeaderMenu />
-            <Header />
-            {children}
-          </>
+          <Container>
+            <>
+              <HeaderMenu />
+              <Header />
+              {children}
+            </>
+          </Container>
         </AntdRegistry>
       </body>
     </html>
