@@ -6,6 +6,8 @@ import Link from "next/link"
 import type { MenuProps } from "antd"
 import { Menu } from "antd"
 
+import Container from "./Container"
+
 type BaseRoute = {
   path: string
   name: string
@@ -80,11 +82,17 @@ export default function HeaderMenu() {
   const itemsFromRoutes = createnastedRoutes(routesColection, "")
 
   return (
-    <Menu
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={itemsFromRoutes}
-    />
+    <div className="fixed w-full">
+      <Container>
+        <header className="shadow-lg ">
+          <Menu
+            onClick={onClick}
+            selectedKeys={[current]}
+            mode="horizontal"
+            items={itemsFromRoutes}
+          />
+        </header>
+      </Container>
+    </div>
   )
 }

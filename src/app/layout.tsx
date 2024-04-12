@@ -24,13 +24,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AntdRegistry>
-          <Container>
-            <>
+          <>
+           
               <HeaderMenu />
-              <Header />
-              {children}
-            </>
-          </Container>
+              {/* <Header /> */}
+              <Container>{children}</Container>
+          </>
         </AntdRegistry>
       </body>
     </html>
