@@ -1,7 +1,8 @@
 "use client"
 import { Button } from "antd"
 
-//
+import Image from "next/image"
+
 // https://medium.com/@mertenercan/nextjs-13-folder-structure-c3453d780366
 
 export default function Home() {
@@ -29,6 +30,13 @@ export default function Home() {
           NextJS 14 Folder Structure
         </a>
       </div>
+
+      <Image
+        src="https://placehold.co/600x400.png"
+        alt="placeholder"
+        width="600"
+        height="400"
+      />
 
       <p className="mx-auto">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia fuga ut

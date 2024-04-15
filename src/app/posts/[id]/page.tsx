@@ -6,9 +6,6 @@ export default function PostId({ params }: { params: { id: string } }) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  console.log("router", router)
-  console.log("pathname", pathname)
-  console.log("searchParams", searchParams)
 
   const { id } = params
 

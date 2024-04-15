@@ -122,22 +122,16 @@ export default function HeaderMenu() {
 
   const [current, setCurrent] = useState("")
 
-  console.log("current", current)
-
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e)
     setCurrent(e.key)
   }
 
   useEffect(() => {
-    console.log("pathname", pathname)
     const collectionOfAllPathes = getRoutesCollection(routesColection, "")
     const activeRoute = collectionOfAllPathes.filter(
       (route) => route.absolutePath === pathname
     )
-    console.log("activeRoute name", activeRoute[0].name)
-
-    setCurrent(activeRoute[0].name)
+    setCurrent(activeRoute[0]?.name || "/")
   }, [pathname])
 
   const itemsFromRoutes = createnastedRoutes(routesColection, "", false)
@@ -146,7 +140,10 @@ export default function HeaderMenu() {
     <div className="fixed w-full">
       <Container>
         <header className="z-10 bg-white shadow-lg flex justify-between items-center px-5">
-          <div className="uppercase font-bold">My super logo</div>
+          <Link href="/">
+            <div className="uppercase font-bold">My super logo</div>
+          </Link>
+
           <Menu
             onClick={onClick}
             selectedKeys={[current]}
