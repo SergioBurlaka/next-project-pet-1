@@ -21,11 +21,10 @@ const PostsList = ({ posts }: PostsType) => {
           posts?.map((item) => {
             return (
               <li key={item.id}>
-                <div className="p-5 border-solid border-2 m-5 border-indigo-500/50 rounded-2xl shadow hover:shadow-lg">
+                <div className="p-5 m-5 border-solid border-2  border-indigo-500/50 rounded-2xl shadow hover:shadow-lg">
                   <h4 className="font-bold">{item.title}</h4>
                   <p className="text-left	 py-8">{item.body}</p>
-
-                  <div  className="flex justify-start">
+                  <div className="flex justify-start">
                     {item.tags &&
                       item.tags.map((tag, index) => (
                         <span
