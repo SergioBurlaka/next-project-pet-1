@@ -6,32 +6,42 @@
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
+import type { Post } from "@prisma/client"
+
 import { prisma } from "../db/prisma"
 
-export async function createPost(params: FormData) {
-  const { title, body } = Object.fromEntries(params)
-  redirect("/posts/...")
+export const createPost = async (params: FormData) => {
+  const { title, body } = Object.fromEntries(params) as Omit<Post, "id">
+  const post = await prisma.post.create({ data: { title, body } })
+  redirect(`/posts/${post.id}`)
 }
 
-export async function updatePost(params: FormData) {
-  const { title, body, id } = Object.fromEntries(params)
+export const updatePost = async (params: FormData) => {
+  const { title, body, id } = Object.fromEntries(params) as Post
 
-  revalidatePath("/posts/...")
-  redirect("/posts/...")
+  const post = await prisma.post.update({
+    where: { id },
+    data: {
+      title,
+      body
+    }
+  })
+
+  revalidatePath(`/posts/${post.id}`)
+  redirect(`/posts/${post.id}`)
 }
 
-export async function deletePost(id: string) {
-  revalidatePath("/posts/...")
-  redirect("/posts/...")
+export const deletePost = async (id: string) => {
+  await prisma.post.delete({ where: { id } })
+  revalidatePath("/posts")
+  redirect("/posts")
 }
 
-export async function getPostById(id: string) {
-  return prisma.post.findUnique({
+export const getPostById = async (id: string) =>
+  prisma.post.findUnique({
     where: {
       id
     }
   })
-}
-export async function getAllPost() {
-  return prisma.post.findMany()
-}
+
+export const getAllPost = async () => prisma.post.findMany()
