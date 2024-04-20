@@ -11,8 +11,8 @@ const initPosts = [
     body: " description"
   },
   {
-    title: "title asdfasdfa",
-    body: "description descripsdfasdftion"
+    title: "tango",
+    body: "a dance with argentinian expression"
   },
   {
     title: "salsa",

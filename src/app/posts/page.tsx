@@ -1,7 +1,9 @@
-import PostsList from "@/src/components/PostsList"
+import PostsList from "@/src/components/posts/PostsList"
 import AddPostForm from "@/src/components/posts/AddPostForm"
 
 import { getAllPost } from "@/src/actions/posts"
+
+import { Suspense } from "react"
 
 import Link from "next/link"
 
@@ -16,6 +18,10 @@ export default async function Posts() {
 
   const posts = await getAllPost()
 
+  //Зробимо затримку
+
+  await new Promise((res) => setTimeout(res, 2000))
+
   return (
     <main className="text-center pt-32 px-5">
       <h1 className="text-4xl md:text-5xl font-bold mb-5">Posts page</h1>
@@ -27,23 +33,10 @@ export default async function Posts() {
         Add new post
       </Link>
       <h1>blog posts</h1>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Link
-              href={`/posts/${post.id}`}
-              className="block m-5 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-            >
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {post.title}
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                {post.body}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+
+      <Suspense fallback="Loading posts ...">
+        <PostsList />
+      </Suspense>
 
       {/* 
       <div>This is not data fom bd</div>
